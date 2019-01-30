@@ -23,7 +23,9 @@ class EventHeatmap extends Component {
             const dayString = format(date, 'YYYY-MM-DD');
             const frequency = frequencyPerDay[dayString] || 0;
             return (
-                <HeatmapCell min={0} max={maximumEventsPerDay} value={frequency} gradient={gradient}/>
+                <HeatmapCell
+                    title={`${dayString} - ${frequency} events`}
+                    min={0} max={maximumEventsPerDay} value={frequency} gradient={gradient}/>
             );
         });
 

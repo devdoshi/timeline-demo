@@ -7,7 +7,7 @@ class HeatmapCell extends Component {
         const backgroundColor = HeatmapUtilities.getColorFromFrequency(min, max, gradient, value);
 
         return (
-            <div style={{margin: 1, width: '10px', height: '10px', fontSize: 0, lineHeight: 1, backgroundColor}}>&nbsp;</div>
+            <div title={this.props.title} style={{margin: 1, width: '10px', height: '10px', fontSize: 0, lineHeight: 1, backgroundColor}}>&nbsp;</div>
         );
     }
 }

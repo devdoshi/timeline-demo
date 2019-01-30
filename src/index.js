@@ -29,6 +29,7 @@ function eventToEventsByDay(event) {
 }
 const eventsSplitAndSortedByDay = flatMap(timelineItems, eventToEventsByDay);
 
+// maybe should sort by name after start and end?
 function sortByStartAndEndDate(eventA, eventB) {
     const {start: startA, end: endA} = eventA;
     const {start: startB, end: endB} = eventB;

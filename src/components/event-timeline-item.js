@@ -12,7 +12,7 @@ class EventTimelineItem extends Component {
         return (
             <li style={{opacity: this.props.isFocused ? 1 : 0.5}}>
                 <button style={{display: 'flex', border: 0, background: 'transparent', alignItems: 'center'}} onClick={this.handleClick}>
-                    <HeatmapCell min={0} max={this.props.maximumEventLength} value={event.context.of} gradient={gradient}/>
+                    <HeatmapCell title={event.start} min={0} max={this.props.maximumEventLength} value={event.context.of} gradient={gradient}/>
                     <div style={{padding: '.25em'}}>{event.name}</div>
                     {event.context.of === 1 ? null : <div>{`(Day ${event.context.position} of ${event.context.of})`}</div>}
                 </button>
