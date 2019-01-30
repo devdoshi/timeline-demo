@@ -6,8 +6,7 @@ import EventTimeline from './components/event-timeline.js';
 import flatMap from 'lodash.flatmap';
 import {addDays, differenceInCalendarDays, format} from 'date-fns';
 
-
-const eventsSplitAndSortedByDay = flatMap(timelineItems, (event) => {
+function eventToEventsByDay(event) {
     const {start, end} = event;
     const daysBetween = differenceInCalendarDays(end, start);
     let output = [];
@@ -27,7 +26,8 @@ const eventsSplitAndSortedByDay = flatMap(timelineItems, (event) => {
         cursor++;
     }
     return output;
-});
+}
+const eventsSplitAndSortedByDay = flatMap(timelineItems, eventToEventsByDay);
 
 function sortByStartAndEndDate(eventA, eventB) {
     const {start: startA, end: endA} = eventA;
@@ -43,8 +43,8 @@ function sortByStartAndEndDate(eventA, eventB) {
 eventsSplitAndSortedByDay.sort(sortByStartAndEndDate);
 
 const maximumEventLength = Math.max(...timelineItems.map(event => differenceInCalendarDays(event.end, event.start)));
-const startDate = new Date(Math.min(...timelineItems.map(event => new Date(event.start).getTime())));
-const endDate = new Date(Math.max(...timelineItems.map(event => new Date(event.end).getTime())));
+const startDate = (Math.min(...timelineItems.map(event => new Date(event.start).getTime())));
+const endDate = (Math.max(...timelineItems.map(event => new Date(event.end).getTime())));
 console.log({maximumEventLength, startDate, endDate});
 
 class App extends React.Component {
@@ -73,6 +73,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <h3>Events from {format(startDate, 'YYYY-MM-DD')} to {format(endDate, 'YYYY-MM-DD')}</h3>
                 <EventHeatmap
                     onDateRangeChange={this.handleDateRangeChange}
                     events={eventsSplitAndSortedByDay}
